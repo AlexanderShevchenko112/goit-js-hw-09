@@ -1,6 +1,6 @@
-const delayEl = document.getElementsByName('delay');
-const stepEl = document.getElementsByName('step');
-const amountEl = document.getElementsByName('amount');
+const delayEl = document.getElementsByName('delay')[0];
+const stepEl = document.getElementsByName('step')[0];
+const amountEl = document.getElementsByName('amount')[0];
 const form = document.querySelector(`.form`);
 const createBtn = document.querySelector(`button`);
 import Notiflix from 'notiflix';
@@ -9,8 +9,8 @@ createBtn.addEventListener(`click`, onSubmit);
 function onSubmit(event) {
   event.preventDefault();
   let delay = 0;
-  for (let position = 1; position <= amountEl.value; position++) {
-    delay = delayEl.value + stepEl.value * (position - 1);
+  for (let position = 1; position <= Number(amountEl.value); position++) {
+    delay = Number(delayEl.value) + Number(stepEl.value) * (position - 1);
     createPromise(position, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(
@@ -23,6 +23,7 @@ function onSubmit(event) {
         );
       });
   }
+
   // form.reset();
 }
 
